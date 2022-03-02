@@ -1,0 +1,254 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.0.76"
+        }
+      },
+      "Step10AppsyncNoDataSourceStack": {
+        "id": "Step10AppsyncNoDataSourceStack",
+        "path": "Step10AppsyncNoDataSourceStack",
+        "children": {
+          "No_data_source": {
+            "id": "No_data_source",
+            "path": "Step10AppsyncNoDataSourceStack/No_data_source",
+            "children": {
+              "ApiLogsRole": {
+                "id": "ApiLogsRole",
+                "path": "Step10AppsyncNoDataSourceStack/No_data_source/ApiLogsRole",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Step10AppsyncNoDataSourceStack/No_data_source/ApiLogsRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "appsync.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSAppSyncPushToCloudWatchLogs"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.14.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.14.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "Step10AppsyncNoDataSourceStack/No_data_source/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::AppSync::GraphQLApi",
+                  "aws:cdk:cloudformation:props": {
+                    "authenticationType": "API_KEY",
+                    "name": "No_data_sorce",
+                    "logConfig": {
+                      "cloudWatchLogsRoleArn": {
+                        "Fn::GetAtt": [
+                          "NodatasourceApiLogsRole6A97E398",
+                          "Arn"
+                        ]
+                      },
+                      "fieldLogLevel": "ALL"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_appsync.CfnGraphQLApi",
+                  "version": "2.14.0"
+                }
+              },
+              "Schema": {
+                "id": "Schema",
+                "path": "Step10AppsyncNoDataSourceStack/No_data_source/Schema",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::AppSync::GraphQLSchema",
+                  "aws:cdk:cloudformation:props": {
+                    "apiId": {
+                      "Fn::GetAtt": [
+                        "Nodatasource0506E151",
+                        "ApiId"
+                      ]
+                    },
+                    "definition": "type Resp {\n  status: String!\n}\n\ntype Mutation {\n  changeStatus(status: String!): Resp!\n}\n\ntype Query {\n  readStatus: Resp!\n}\n"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_appsync.CfnGraphQLSchema",
+                  "version": "2.14.0"
+                }
+              },
+              "DefaultApiKey": {
+                "id": "DefaultApiKey",
+                "path": "Step10AppsyncNoDataSourceStack/No_data_source/DefaultApiKey",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::AppSync::ApiKey",
+                  "aws:cdk:cloudformation:props": {
+                    "apiId": {
+                      "Fn::GetAtt": [
+                        "Nodatasource0506E151",
+                        "ApiId"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_appsync.CfnApiKey",
+                  "version": "2.14.0"
+                }
+              },
+              "noDataSource": {
+                "id": "noDataSource",
+                "path": "Step10AppsyncNoDataSourceStack/No_data_source/noDataSource",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "Step10AppsyncNoDataSourceStack/No_data_source/noDataSource/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::AppSync::DataSource",
+                      "aws:cdk:cloudformation:props": {
+                        "apiId": {
+                          "Fn::GetAtt": [
+                            "Nodatasource0506E151",
+                            "ApiId"
+                          ]
+                        },
+                        "name": "noDataSorce",
+                        "type": "NONE",
+                        "description": "Does not save incoming Data anywhere"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_appsync.CfnDataSource",
+                      "version": "2.14.0"
+                    }
+                  },
+                  "MutationchangeStatusResolver": {
+                    "id": "MutationchangeStatusResolver",
+                    "path": "Step10AppsyncNoDataSourceStack/No_data_source/noDataSource/MutationchangeStatusResolver",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "Step10AppsyncNoDataSourceStack/No_data_source/noDataSource/MutationchangeStatusResolver/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::AppSync::Resolver",
+                          "aws:cdk:cloudformation:props": {
+                            "apiId": {
+                              "Fn::GetAtt": [
+                                "Nodatasource0506E151",
+                                "ApiId"
+                              ]
+                            },
+                            "fieldName": "changeStatus",
+                            "typeName": "Mutation",
+                            "dataSourceName": "noDataSorce",
+                            "kind": "UNIT",
+                            "requestMappingTemplate": "{\n        \"version\" : \"2017-02-28\",\n        \"payload\": $util.toJson($context.arguments)\n        }",
+                            "responseMappingTemplate": "$util.toJson($context.result)"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_appsync.CfnResolver",
+                          "version": "2.14.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-appsync-alpha.Resolver",
+                      "version": "2.15.0-alpha.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-appsync-alpha.NoneDataSource",
+                  "version": "2.15.0-alpha.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-appsync-alpha.GraphqlApi",
+              "version": "2.15.0-alpha.0"
+            }
+          },
+          "Url_endpoint_of_appsync": {
+            "id": "Url_endpoint_of_appsync",
+            "path": "Step10AppsyncNoDataSourceStack/Url_endpoint_of_appsync",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.14.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "Step10AppsyncNoDataSourceStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "Step10AppsyncNoDataSourceStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.14.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "Step10AppsyncNoDataSourceStack/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnCondition",
+                  "version": "2.14.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.0.76"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.14.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.14.0"
+    }
+  }
+}

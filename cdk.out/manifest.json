@@ -1,0 +1,112 @@
+{
+  "version": "16.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "Step10AppsyncNoDataSourceStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "Step10AppsyncNoDataSourceStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "Step10AppsyncNoDataSourceStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "Step10AppsyncNoDataSourceStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/c7f11bcd30f9ab82e1b2eabf7cdb9b6c17a76b13b252c69174eda3101ee7844a.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "Step10AppsyncNoDataSourceStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "Step10AppsyncNoDataSourceStack.assets"
+      ],
+      "metadata": {
+        "/Step10AppsyncNoDataSourceStack/No_data_source/ApiLogsRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodatasourceApiLogsRole6A97E398"
+          }
+        ],
+        "/Step10AppsyncNoDataSourceStack/No_data_source/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Nodatasource0506E151"
+          }
+        ],
+        "/Step10AppsyncNoDataSourceStack/No_data_source/Schema": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodatasourceSchema3882E6FB"
+          }
+        ],
+        "/Step10AppsyncNoDataSourceStack/No_data_source/DefaultApiKey": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodatasourceDefaultApiKeyB6FDE6DD"
+          }
+        ],
+        "/Step10AppsyncNoDataSourceStack/No_data_source/noDataSource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodatasourcenoDataSource8D211112"
+          }
+        ],
+        "/Step10AppsyncNoDataSourceStack/No_data_source/noDataSource/MutationchangeStatusResolver/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NodatasourcenoDataSourceMutationchangeStatusResolver57146B22"
+          }
+        ],
+        "/Step10AppsyncNoDataSourceStack/Url_endpoint_of_appsync": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Urlendpointofappsync"
+          }
+        ],
+        "/Step10AppsyncNoDataSourceStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/Step10AppsyncNoDataSourceStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/Step10AppsyncNoDataSourceStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/Step10AppsyncNoDataSourceStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "Step10AppsyncNoDataSourceStack"
+    }
+  }
+}
